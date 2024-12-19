@@ -44,6 +44,9 @@ export const login: RequestHandler = async (req, res, next): Promise<void> => {
     const { email, password } = req.body;
 
     const user = await User.findOne({ email });
+    console.log("user est", user);
+    console.log("Requête de connexion reçue:", req.body);
+
     if (!user) {
       res.status(401).json({ message: "Email ou mot de passe incorrect" });
       return;

@@ -10,7 +10,13 @@ connectDB();
 
 const app: Application = express();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://192.168.2.134:8081",
+    methods: ["GET", "POST"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 app.use(bodyParser.json());
 app.use("/api/auth", authRoutes);
 
