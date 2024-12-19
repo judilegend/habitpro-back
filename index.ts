@@ -19,6 +19,10 @@ app.use(
 );
 app.use(bodyParser.json());
 app.use("/api/auth", authRoutes);
+console.log("ENV loaded:", {
+  JWT_SECRET: process.env.JWT_SECRET,
+  MONGODB_URI: process.env.MONGODB_URI,
+});
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

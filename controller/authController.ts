@@ -34,7 +34,9 @@ export const register: RequestHandler = async (
     );
 
     res.status(201).json({ token });
+    console.log("Utilisateur enregistré avec succès", token);
   } catch (error) {
+    console.log("Erreur détaillée:", error);
     res.status(500).json({ message: "Erreur lors de l'inscription" });
   }
 };
@@ -44,7 +46,6 @@ export const login: RequestHandler = async (req, res, next): Promise<void> => {
     const { email, password } = req.body;
 
     const user = await User.findOne({ email });
-    console.log("user est", user);
     console.log("Requête de connexion reçue:", req.body);
 
     if (!user) {
@@ -66,6 +67,9 @@ export const login: RequestHandler = async (req, res, next): Promise<void> => {
 
     res.json({ token });
   } catch (error) {
+    console.log("Erreur détaillée:", error);
+    console.log("JWT_SECRET:", process.env.JWT_SECRET);
+
     res.status(500).json({ message: "Erreur lors de la connexion" });
   }
 };
